@@ -1,0 +1,26 @@
+schemaVersion: 2.2.0
+metadata:
+  name: helloworld-ko68
+components:
+  - name: container-1
+    container:
+      image: 'quay.io/devfile/universal-developer-image:latest'
+      mountSources: true
+      memoryRequest: 500Mi
+      memoryLimit: 6G
+      cpuRequest: 1000m
+      cpuLimit: 4000m
+      endpoints:
+        - name: port-8080
+          targetPort: 8080
+          exposure: public
+      env:
+        - name: WELCOME
+          value: Hello World
+commands:
+  - id: command-1
+    exec:
+      label: Sample Command
+      component: container-1
+      commandLine: 'echo "${WELCOME}"'
+      workingDir: '${PROJECT_SOURCE}'
